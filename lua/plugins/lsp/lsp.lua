@@ -58,7 +58,7 @@ return {
             -- Mason Setup
             require('mason').setup({})
             require('mason-lspconfig').setup({
-                ensure_installed = { 'pyright', 'jdtls', 'ts_ls', 'lua_ls'}, 			-- Specify LSPs
+                ensure_installed = { 'pyright', 'ruff_lsp', 'jdtls', 'ts_ls', 'lua_ls'}, 	-- Specify LSPs
                 handlers = {
                     function(server_name)
                         if server_name ~= 'jdtls' then
@@ -82,6 +82,16 @@ return {
                         })
                         vim.lsp.enable('lua_ls')
                     end,
+                    ruff_lsp = function ()
+                        vim.lsp.config('ruff_lsp', {
+                            cmd = { 'ruff_lsp' },
+
+                            settings = {
+                                args = {},
+                            },
+                        })
+                        vim.lsp.enable('ruff_lsp')
+                    end
                 },
             })
 
@@ -96,6 +106,16 @@ return {
             vim.api.nvim_command('MasonToolsInstall')
         end,
     },
+        
+    vim.api.nvim_create_autocmd("BufWritePre", {
+        pattern = "*.py",
+        callback = function ()
+            vim.lsp.buf.code_action({
+                apply=true,
+                context= { only = { "source.fixAll" } }
+            })
+        end,
+    }),
 
     -- Completion
     {
