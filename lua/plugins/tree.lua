@@ -7,7 +7,17 @@ return {
     },
     config = function()
         require("nvim-tree").setup {
+            filters = {
+                dotfiles = false,  -- Show hidden files (files starting with .)
+                custom = {},       -- Remove any custom filters
+                exclude = {},      -- Don't exclude anything
+            },
+            git = {
+                enable = true,
+                ignore = false,    -- Show files from .gitignore
+            },
             renderer = {
+                hidden_display = "all",  -- Show all hidden files
                 indent_markers = {
                     enable = true,          -- turn on the lines
                     inline_arrows = false,  -- keep arrows at start of line
@@ -19,6 +29,9 @@ return {
                         none = " ",
                     },
                 },
+            },
+            view = {
+                width = 35,
             },
         }
 
