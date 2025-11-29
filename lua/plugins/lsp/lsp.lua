@@ -151,6 +151,7 @@ return {
 					settings = {
 						pylsp = {
 							plugins = {
+
 								pyflakes = { enabled = false },
 								pycodestyle = { enabled = false },
 								autopep8 = { enabled = false },
@@ -159,27 +160,46 @@ return {
 								pylsp_mypy = { enabled = false },
 								pylsp_black = { enabled = false },
 								pylsp_isort = { enabled = false },
+								jedi_completion = {
+									enabled = true,
+									include_params = true,
+									fuzzy = true,
+								},
+								jedi_definition = { enabled = true },
+								jedi_references = { enabled = true },
+								jedi_symbols = { enabled = true },
+							},
+							-- KEY ADDITION: Enable workspace scanning
+							configurationSources = { "pycodestyle" },
+						},
+					},
+				},
+				basedpyright = {
+					-- Config options: https://github.com/DetachHead/basedpyright/blob/main/docs/settings.md
+					settings = {
+						basedpyright = {
+							disableOrganizeImports = true, -- Using Ruff's import organizer
+							disableLanguageServices = false,
+							analysis = {
+								ignore = { "*" }, -- Ignore all files for analysis to exclusively use Ruff for linting
+								typeCheckingMode = "basic",
+								diagnosticMode = "workspace", -- analyse the entire workspace
+								useLibraryCodeForTypes = true,
+								autoImportCompletions = true, -- whether pyright offers auto-import completions
 							},
 						},
 					},
 				},
-				-- basedpyright = {
-				--   -- Config options: https://github.com/DetachHead/basedpyright/blob/main/docs/settings.md
-				--   settings = {
-				--     basedpyright = {
-				--       disableOrganizeImports = true, -- Using Ruff's import organizer
-				--       disableLanguageServices = false,
-				--       analysis = {
-				--         ignore = { '*' },                 -- Ignore all files for analysis to exclusively use Ruff for linting
-				--         typeCheckingMode = 'off',
-				--         diagnosticMode = 'openFilesOnly', -- Only analyze open files
-				--         useLibraryCodeForTypes = true,
-				--         autoImportCompletions = true,     -- whether pyright offers auto-import completions
-				--       },
-				--     },
-				--   },
-				-- },
-				ruff = {},
+				ruff = {
+					-- Ruff should also watch files
+					init_options = {
+						settings = {
+							-- Enable workspace diagnostics
+							organizeImports = true,
+							fixAll = true,
+						},
+					},
+				},
 				jsonls = {},
 				sqlls = {},
 				terraformls = {},
