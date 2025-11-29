@@ -48,3 +48,6 @@ vim.g.mapleader = " "
 -- cursor
 vim.o.guicursor = "i:block-blinkwait700-blinkon400-blinkoff250"
 
+-- autosave
+vim.opt.autowrite = true
+vim.opt.autowriteall = true
