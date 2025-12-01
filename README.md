@@ -2,6 +2,7 @@
 - npm
 - pip
 - gcc
+- fd-find
 
 install using apt
 
