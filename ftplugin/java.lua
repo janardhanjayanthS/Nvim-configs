@@ -1,11 +1,12 @@
 -- JDTLS (Java LSP) configuration
 local home = vim.env.HOME -- Get the home directory
+-- local home = "/usr/lib/jvm/jdk-25"
 
 local jdtls = require("jdtls")
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 local workspace_dir = home .. "/jdtls-workspace/" .. project_name
 
-local system_os = ""
+local system_os = "linux"
 
 -- Determine OS
 if vim.fn.has("mac") == 1 then
@@ -75,13 +76,13 @@ local config = {
                 -- Running-the-JAVA-LS-server-from-the-command-line#initialize-request and search "ExecutionEnvironment".
                 runtimes = {
                     {
-                        name = "JavaSE-24",
-                        path = "/mnt/c/Program Files/Java/jdk-24",
+                        name = "JavaSE-25",
+                        path = "/mnt/c/Program Files/Java/jdk-25",
                     },
-                    -- {
-                    --     name = "JavaSE-11",
-                    --     path = "/usr/lib/jvm/java-11-openjdk-amd64",
-                    -- },
+                    {
+                        name = "JavaSE-25",
+                        path = "/usr/lib/jvm/jdk-25",
+                    },
                     -- {
                     --     name = "JavaSE-17",
                     --     path = "/usr/lib/jvm/java-17-openjdk-amd64",
