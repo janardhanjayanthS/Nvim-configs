@@ -10,16 +10,15 @@ vim.opt.expandtab = true
 local set_indent = vim.api.nvim_create_augroup("set_indent", { clear = true })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = {"html", "css" },  -- filetypes
-    callback = function()
-        vim.bo.shiftwidth = 2
-        vim.bo.tabstop = 2
-        vim.bo.softtabstop = 2
-        vim.bo.expandtab = true
-    end,
-    group = set_indent,
+	pattern = { "html", "css" }, -- filetypes
+	callback = function()
+		vim.bo.shiftwidth = 2
+		vim.bo.tabstop = 2
+		vim.bo.softtabstop = 2
+		vim.bo.expandtab = true
+	end,
+	group = set_indent,
 })
-
 
 vim.opt.smartindent = true
 
@@ -30,8 +29,8 @@ vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
-vim.opt.hlsearch = false    -- highlights search
-vim.opt.incsearch = true    -- increamental search
+vim.opt.hlsearch = false -- highlights search
+vim.opt.incsearch = true -- increamental search
 
 vim.opt.termguicolors = true
 
